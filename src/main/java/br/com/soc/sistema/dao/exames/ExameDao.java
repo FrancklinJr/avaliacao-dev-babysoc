@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -105,4 +106,41 @@ public class ExameDao extends Dao {
 		}		
 		return null;
 	}
+	
+	public void editarExame(ExameVo exameVo) {
+		StringBuilder query = new StringBuilder("UPDATE exame SET nm_exame = ? WHERE rowid = ?");
+		
+		try(Connection con = getConexao();
+			PreparedStatement ps = con.prepareStatement(query.toString())) {
+			ps.setString(1, exameVo.getNome());
+			ps.setInt(2, Integer.parseInt(exameVo.getRowid()));
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deletarExame(Integer codigo) {
+		StringBuilder query = new StringBuilder("DELETE FROM exame WHERE rowid = ?");
+		
+		try(Connection con = getConexao();
+				PreparedStatement ps = con.prepareStatement(query.toString())) {
+			ps.setInt(1, codigo);
+			ps.executeUpdate();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 }

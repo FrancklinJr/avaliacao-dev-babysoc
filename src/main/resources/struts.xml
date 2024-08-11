@@ -15,7 +15,21 @@
         <action name="*Exames" class="br.com.soc.sistema.action.exame.ExameAction" method="{1}">
         	<result name="success">/exame/cadExame_b.jsp</result>
             <result name="input">/exame/cadExame_i.jsp</result>
+        	<result name="edit">/exame/cadExame_e.jsp</result>
         	<result name="redirect" type="redirectAction">todosExames</result>
+        </action>
+        <action name="*Funcionarios" class="br.com.soc.sistema.action.funcionario.FuncionarioAction" method="{1}">
+        	<result name="success">/funcionario/cadFuncionario_b.jsp</result>
+            <result name="input">/funcionario/cadFuncionario_i.jsp</result>
+        	<result name="edit">/funcionario/cadFuncionario_e.jsp</result>
+        	<result name="redirect" type="redirectAction">todosFuncionarios</result>
+        </action>
+        <action name="*Historico" class="br.com.soc.sistema.action.historico.HistoricoAction" method="{1}">
+        	<result name="success">/historico/cadHistorico_b.jsp</result>
+            <result name="input">/historico/cadHistorico_i.jsp</result>
+        	<result name="edit">/historico/cadHistorico_e.jsp</result>
+        	<result name="resume">/historico/cadHistorico_r.jsp</result>
+        	<result name="redirect" type="redirectAction">todosHistorico</result>
         </action>
     </package>
 

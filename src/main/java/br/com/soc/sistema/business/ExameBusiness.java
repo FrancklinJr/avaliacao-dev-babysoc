@@ -62,4 +62,24 @@ public class ExameBusiness {
 			throw new BusinessException(FOI_INFORMADO_CARACTER_NO_LUGAR_DE_UM_NUMERO);
 		}
 	}
+	
+	public void atualizarExame(ExameVo exameVo) {
+		try {
+			if(exameVo.getNome().isEmpty())
+				throw new IllegalArgumentException("Nome nao pode ser em branco");
+			
+			dao.editarExame(exameVo);
+		} catch (Exception e) {
+			throw new BusinessException("Nao foi possivel realizar a edicao do registro");
+		}
+	}
+	
+	public void deletarExame(String codigo) {
+		try {
+			Integer cod = Integer.parseInt(codigo);
+			dao.deletarExame(cod);
+		} catch(Exception e) {
+			throw new BusinessException("Nao foi possivel realizar a exclusao do registro");
+		}
+	}
 }

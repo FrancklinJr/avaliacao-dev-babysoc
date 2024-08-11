@@ -15,6 +15,7 @@ public class ExameAction extends Action {
 	private ExameBusiness business = new ExameBusiness();
 	private ExameFilter filtrar = new ExameFilter();
 	private ExameVo exameVo = new ExameVo();
+	private String rowid;
 	
 	public String todos() {
 		exames.addAll(business.trazerTodosOsExames());	
@@ -43,12 +44,28 @@ public class ExameAction extends Action {
 	public String editar() {
 		if(exameVo.getRowid() == null)
 			return REDIRECT;
-		
+			
 		exameVo = business.buscarExamePor(exameVo.getRowid());
-		
-		return INPUT;
+		return EDIT;
 	}
 	
+	public String update() {
+		if(exameVo.getNome() == null)
+			return EDIT;
+
+		business.atualizarExame(exameVo);
+		return REDIRECT;
+	}
+	
+	public String deletar() {
+		if(rowid == null) 
+			return REDIRECT;
+		
+		business.deletarExame(rowid);
+		
+		return REDIRECT;
+	}
+
 	public List<OpcoesComboBuscarExames> getListaOpcoesCombo(){
 		return Arrays.asList(OpcoesComboBuscarExames.values());
 	}
@@ -75,5 +92,13 @@ public class ExameAction extends Action {
 
 	public void setExameVo(ExameVo exameVo) {
 		this.exameVo = exameVo;
+	}
+
+	public String getRowid() {
+		return rowid;
+	}
+
+	public void setRowid(String rowid) {
+		this.rowid = rowid;
 	}
 }

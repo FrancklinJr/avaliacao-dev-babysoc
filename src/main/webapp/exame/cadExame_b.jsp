@@ -57,22 +57,30 @@
 									<a href="${editar}" class="btn btn-warning text-white">
 										<s:text name="label.editar"/>
 									</a>
-
-									<a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusao">
+									
+									<a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarExclusao" data-rowid="${rowid}">
 										<s:text name="label.excluir"/>
 									</a>
 								</td>
 							</tr>
+
 						</s:iterator>
 					</tbody>
 					
 					<tfoot class="table-secondary">
 						<tr>
-							<td colspan="3">
+							<td colspan="2">
 								<s:url action="novoExames" var="novo"/>
 								
 								<a href="${novo}" class="btn btn-success">
 									<s:text name="label.novo"/>
+								</a>
+							</td>
+							<td class="text-end">
+								<s:url action="todosFuncionarios" var="funcionarios"/>
+								
+								<a href="${funcionarios}" class="btn btn-success">
+									<s:text name="label.funcionarios"/>
 								</a>
 							</td>
 						</tr>
@@ -101,18 +109,38 @@
 		      </div>
 		      
 		      <div class="modal-footer">
-	        	<a class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
+				<a class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
 					<s:text name="label.nao"/>
 				</a>
-	        	
-				<s:a id="excluir" class="btn btn-primary" style="width: 75px;">
+				<a id="confirmarExclusaoBtn" class="btn btn-primary" style="width: 75px;">
 					<s:text name="label.sim"/>
-				</s:a>						
+				</a>
 		      </div>
 		    </div>		    
 		  </div>
 		</div>
 		
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+			    var confirmarExclusaoBtn = document.getElementById('confirmarExclusaoBtn');
+	
+			    var exameId;
+	
+			    document.querySelectorAll('a[data-bs-toggle="modal"]').forEach(function(button) {
+			        button.addEventListener('click', function() {
+			            exameId = button.getAttribute('data-rowid');
+			        });
+			    });
+	
+			    confirmarExclusaoBtn.addEventListener('click', function() {
+			        if (exameId) {
+			            window.location.href = 'deletarExames.action?rowid=' + encodeURIComponent(exameId);
+			        }
+			    });
+			});
+		</script>
+
 		<script src="webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
 	</body>
 </html>
